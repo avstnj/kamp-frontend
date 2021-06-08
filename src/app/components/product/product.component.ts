@@ -9,22 +9,22 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
-  dataLoaded=false;
+  dataLoaded = false;
   // productResponseModel:ProductResponseModel={
   //   data:this.products,
   //   message:"",
   //   success:true
   // };
 
-  constructor(private productService:ProductService) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.getProducts();
   }
   getProducts() {
-    this.productService.getProducts().subscribe((response)=>{
+    this.productService.getProducts().subscribe((response) => {
       this.products = response.data;
-      this.dataLoaded=true;
+      this.dataLoaded = true;
     });
   }
 }
