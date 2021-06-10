@@ -5,10 +5,11 @@ import { CategoryService } from 'src/app/services/category.service';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit {
   categories: Category[] = [];
+  currentCategory: Category = { categoryId: 0, categoryName: '' };
   dataLoaded = false;
   constructor(private categoryService: CategoryService) {}
 
@@ -22,5 +23,26 @@ export class CategoryComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
+  setCurrentCategory(category: Category) {
+    console.log(category);
+    this.currentCategory = category;
+  }
+  getCurrentCategoryClass(category: Category) {
+    if (category == this.currentCategory) {
+      return 'list-group-item active';
+    } else {
+      return 'list-group-item';
+    }
+  }
 
+  getAllCategoryClass() {
+    if (this.currentCategory.categoryId == 0) {
+      return 'list-group-item active';
+    } else {
+      return 'list-group-item';
+    }
+  }
+  clearCurrentCategory() {
+    this.currentCategory = { categoryId: 0, categoryName: '' };
+  }
 }
