@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductComponent implements OnInit {
   products: Product[] = [];
   dataLoaded = false;
+  filterText = "";
   // productResponseModel:ProductResponseModel={
   //   data:this.products,
   //   message:"",
@@ -18,14 +19,14 @@ export class ProductComponent implements OnInit {
   // };
 
   //ActivatedRoute : building service,Gelen parametreyi yakalayan // http://localhost:4200/products/category/10 --> 10
-  constructor(private productService: ProductService,private activatedRoute:ActivatedRoute) {}
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=>{
-      if(params["categoryId"]){
+    this.activatedRoute.params.subscribe(params => {
+      if (params["categoryId"]) {
         this.getProductsByCategory(params["categoryId"]);
       }
-      else{
+      else {
         this.getProducts();
       }
     });
@@ -37,7 +38,7 @@ export class ProductComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
-  getProductsByCategory(categoryId:number) {
+  getProductsByCategory(categoryId: number) {
     this.productService.getProductsByCategory(categoryId).subscribe((response) => {
       this.products = response.data;
       this.dataLoaded = true;
